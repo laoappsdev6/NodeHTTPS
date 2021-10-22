@@ -13,5 +13,4 @@ https.createServer(options, function (req, res) {
     res.end("hello world\n");
 }).listen(port, '0.0.0.0', () => {
     console.log("HTTPS Server is running on port " + port);
-
 });
