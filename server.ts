@@ -1,6 +1,6 @@
 import * as https from 'https';
 import * as fs from 'fs';
-import * as express from 'express';
+import express from 'express';
 import * as http from 'http'
 
 const app = express();
@@ -15,18 +15,19 @@ const options = {
 };
 
 https.createServer(options, function (req, res) {
-    console.log("message", req)
+    console.log("HTTPS MESSAGE", req)
     res.writeHead(200);
-    res.end("HTTPS say hello world\n");
+    res.end("HTTPS SAY HELLO WORLD!");
 }).listen(httpsPort, '0.0.0.0', () => {
-    console.log("HTTPS Server is running on port " + httpsPort);
+    console.log("HTTPS SERVER IS RUNNIN ON PORT " + httpsPort);
 });
 
 
-app.post("/", (req, res) => {
-    res.send("hello world")
+app.get("/", (req, res) => {
+    console.log("http message", req.body)
+    res.send("http say hello world")
 })
 http.createServer(app)
     .listen(httpPort, '0.0.0.0', () => {
-        console.log("My Server is running on port " + httpPort);
+        console.log("http server is running on port " + httpPort);
     });
