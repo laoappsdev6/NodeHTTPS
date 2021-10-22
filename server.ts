@@ -1,6 +1,6 @@
 import * as https from 'https';
 import * as fs from 'fs';
-import express from 'express';
+import * as express from 'express';
 import * as http from 'http'
 
 const app = express();
@@ -10,12 +10,12 @@ const httpsPort = 45689;
 
 
 const options = {
-    key: fs.readFileSync('key.pem'),
-    cert: fs.readFileSync('cert.pem')
+    key: fs.readFileSync('hangmi.la.key'),
+    cert: fs.readFileSync('hangmi.la.pem')
 };
 
 https.createServer(options, function (req, res) {
-    console.log("HTTPS MESSAGE", req)
+    console.log("HTTPS REQUEST")
     res.writeHead(200);
     res.end("HTTPS SAY HELLO WORLD!");
 }).listen(httpsPort, '0.0.0.0', () => {
@@ -24,7 +24,7 @@ https.createServer(options, function (req, res) {
 
 
 app.get("/", (req, res) => {
-    console.log("http message", req.body)
+    console.log("http request")
     res.send("http say hello world")
 })
 http.createServer(app)
